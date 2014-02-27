@@ -12,6 +12,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import javax.imageio.ImageIO;
 
+import net.coobird.thumbnailator.Thumbnails;
+
 public class MainServer {
   private static final int PORT = 9999;  
   public static void main(String[] args) throws HeadlessException, AWTException, IOException {
@@ -24,6 +26,9 @@ public class MainServer {
       BufferedImage screencapture = new Robot().createScreenCapture(
           new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()) );
       
+      // compress the picture
+      screencapture = Thumbnails.of(screencapture).scale(0.5f).asBufferedImage();
+
       ByteArrayOutputStream out = new ByteArrayOutputStream();
       ImageIO.write(screencapture, "jpg", out);
       byte[] b = out.toByteArray();
