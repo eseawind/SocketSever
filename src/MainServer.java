@@ -2,7 +2,7 @@ import java.awt.AWTException;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.Toolkit;
+//import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -23,10 +23,13 @@ public class MainServer {
     System.out.println(ip);
 
     for(;;){
+//      BufferedImage screencapture = new Robot().createScreenCapture(
+//          new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()) );
+
       BufferedImage screencapture = new Robot().createScreenCapture(
-          new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()) );
+          new Rectangle(0,67,1280,720));
       
-      // compress the picture
+      // compress the picture using thumbnailator-0.4.2.jar
       screencapture = Thumbnails.of(screencapture).scale(0.5f).asBufferedImage();
 
       ByteArrayOutputStream out = new ByteArrayOutputStream();
