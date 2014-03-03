@@ -15,28 +15,31 @@ import javax.imageio.ImageIO;
 import net.coobird.thumbnailator.Thumbnails;
 
 public class MainServer {
-  private static final int PORT = 9999;  
+  private static final int PORT = 2014;  
   public static void main(String[] args) throws HeadlessException, AWTException, IOException {
     
+    // Show IP address
     String ip = null;
     ip = InetAddress.getLocalHost().getHostAddress();
     System.out.println(ip);
 
     for(;;){
+      // Capture all screen
 //      BufferedImage screencapture = new Robot().createScreenCapture(
 //          new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()) );
 
+      // Capture the rectangle screen
       BufferedImage screencapture = new Robot().createScreenCapture(
           new Rectangle(0,67,1280,720));
       
-      // compress the picture using thumbnailator-0.4.2.jar
+      // Compress the picture using thumbnailator-0.4.2.jar
       screencapture = Thumbnails.of(screencapture).scale(0.5f).asBufferedImage();
 
       ByteArrayOutputStream out = new ByteArrayOutputStream();
       ImageIO.write(screencapture, "jpg", out);
       byte[] b = out.toByteArray();
       
-      // save in local
+      // Save in local
 //      File file = new File("screencapture.jpg");
 //      ImageIO.write(screencapture, "jpg", file);
 
